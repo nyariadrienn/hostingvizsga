@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "quoteapp-b9dc6": {
+      "hosting": {
+        "quoteapp": [
+          "quoteapp-b9dc6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "quoteapp-b9dc6"
+  }
+}
