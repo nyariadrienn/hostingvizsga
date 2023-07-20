@@ -3,57 +3,60 @@
 
 <button (click)="logout()" class="btn btn-sm btn-danger">Logout</button>
 <br/><br/>
-
+<div class="container">
 <div class="row">
-    <div class="col-6">
-        <div class="mb-3">
-            <label class="form-label">Quotes</label>
-            <input type="text" class="form-control" [(ngModel)]="actual.quote">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Authors</label>
-            <input type="text" class="form-control" [(ngModel)]="actual.author">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">First name</label>
-            <input type="text" class="form-control" disabled [(ngModel)]="actual.creator.firstName">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Last name</label>
-            <input type="text" class="form-control" disabled [(ngModel)]="actual.creator.lastName">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-control" disabled [(ngModel)]="actual.creator.email">
-        </div>
-        <button class="btn btn-primary" (click)="service.addQuote(actual)">Add quote</button>
-    </div>
-</div>
-
-<br /><br />
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let x of service.quotes | keyvalue">
-        <div class="card h-100" >
-            <div class="card-body">
-                <h5 class="card-title">{{x.value.author}} :  {{x.value.quote}} as String</h5>
-                    <p class="card-text">
-                    <b>Creator: </b> {{x.value.creator.firstName}} {{x.value.creator.lastName}} <br/>
-                    <b>Votes: </b> 
-                    <span *ngFor="let y of x.value.voters"
-                    class="badge bg-warning" style="margin-right: 2px;">
-                        {{y.firstName}} {{y.lastName}}
-                    </span>
-                </p>
+    <div class="row w-50">
+        <div class="col" id="addQuote">
+            <div class="mb-3">
+                <label class="form-label">Quotes</label>
+                <input type="text" class="form-control" [(ngModel)]="actual.quote">
             </div>
-            <div class="card-footer">
-                <button [disabled]="service.isVoted(x.value)"
-                (click)="service.vote(x.key)" 
-                class="btn btn-sm btn-warning">Vote</button> &nbsp;
-                
-                <button [disabled]="!service.isVoted(x.value)"
-                (click)="service.unvote(x.key)" 
-                class="btn btn-sm btn-info">Unvote</button>
+            <div class="mb-3">
+                <label class="form-label">Authors</label>
+                <input type="text" class="form-control" [(ngModel)]="actual.author">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">First name</label>
+                <input type="text" class="form-control" disabled [(ngModel)]="actual.creator.firstName">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Last name</label>
+                <input type="text" class="form-control" disabled [(ngModel)]="actual.creator.lastName">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" disabled [(ngModel)]="actual.creator.email">
+            </div>
+            <button class="btn btn-primary" (click)="service.addQuote(actual)">Add quote</button>
+        </div>
+    </div>
+
+    <div class="row w-50 g-3">
+        <div class="col" id="quotes" *ngFor="let x of service.quotes | keyvalue">
+            <div class="card h-100" >
+                <div class="card-body">
+                    <h5 class="card-title">{{x.value.author}}:  <br/><br/>{{x.value.quote}} </h5>
+                        <p class="card-text">
+                        </p>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <b>Creator: </b> {{x.value.creator.firstName}} {{x.value.creator.lastName}} <br/>
+                        <b>Votes: </b> 
+                        <span *ngFor="let y of x.value.voters"
+                        class="badge bg-warning" style="margin-right: 2px;">
+                        {{y.firstName}} {{y.lastName}}
+                        </span>
+                    </div>
+                    <br/>
+                    <button [disabled]="service.isVoted(x.value)"
+                    (click)="service.vote(x.key)" 
+                    class="btn btn-sm btn-warning">Vote</button> &nbsp;
+                    
+                    <button [disabled]="!service.isVoted(x.value)"
+                    (click)="service.unvote(x.key)" 
+                    class="btn btn-sm btn-info">Unvote</button>
+                </div>
             </div>
         </div>
     </div>

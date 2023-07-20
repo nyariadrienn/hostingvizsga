@@ -5,7 +5,7 @@ import { VoteComponent } from './components/vote/vote.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'vote', pathMatch: 'full'},
+  {path: '', component: VoteComponent},
   {path: 'login', component: LoginComponent},
   {path: 'vote', component: VoteComponent},
   {path: '**', redirectTo: 'vote', pathMatch: 'full'}

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
-import { Quote } from 'src/app/models/quote';
 import { AuthService } from 'src/app/services/auth.service';
 import { VoteService } from 'src/app/services/vote.service';
+import { Quote } from 'src/app/models/quote';
 
 @Component({
   selector: 'app-vote',
@@ -11,12 +11,13 @@ import { VoteService } from 'src/app/services/vote.service';
 })
 export class VoteComponent {
   actual: Quote = new Quote();
+  newQuote: Quote = new Quote();
+  quotes: Quote[] = [];
 
   constructor(public service: VoteService, public auth: AuthService, private router: Router) {
     if(!auth.isLoggedIn()) {
       router.navigate(['login']);
-      console.log();
-    }
+     }
     else {
       this.actual.creator = auth.getCurrentUser();
     }
@@ -27,4 +28,10 @@ export class VoteComponent {
       this.router.navigate(['login']);
     });
   }
+
+  addQuote() {
+    this.service.addQuote(this.newQuote);
+    this.newQuote = new Quote(); 
+  }
+
 }

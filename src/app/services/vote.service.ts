@@ -15,7 +15,7 @@ export class VoteService {
     });
   } 
   
-  addQuote(q: Quote) {
+  addQuote(q: Quote): void {
     let quotesArray = Array.from(this.quotes.values());
     if (quotesArray.find(t => t.quote == q.quote) == undefined){
       let clonedQuote: Quote = JSON.parse(JSON.stringify(q));
@@ -25,7 +25,6 @@ export class VoteService {
     else{
       alert('This quote is already exists!');
     }
-    console.log(quotesArray);
   }
 
   vote(id: string){
